@@ -2,12 +2,6 @@ import React, { Component } from 'react';
 import './TempOutput.css';
 
 class TempOutput extends Component {
-  state = {
-    default: 'c'
-  }
-  convertCelsiusToKelvin = () => {
-
-  }
   render() {
     const { temperature } = this.props;
     return (
