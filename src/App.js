@@ -11,20 +11,17 @@ class App extends Component {
     error: null
   }
 
-  makeReq = city => {
+  makeApiRequest = city => {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${process.env.REACT_APP_WEATHER_API_KEY}`;
-
     axios.get(url)
       .then(response => {
-        this.setState({ data: response.data });
+        this.setState({ data: response.data, error: '' });
       })
       .catch(err => this.setState({ error: 'Invalid city name' }));
   }
 
   handleSubmit = city => {
-    console.log(`${city} submitted`);
-    this.setState({ error: '' });
-    this.makeReq(city);
+    this.makeApiRequest(city);
   }
 
   render() {
