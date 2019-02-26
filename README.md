@@ -1,5 +1,7 @@
 # Weather App ⛅
 
+[![Build Status](https://travis-ci.org/hkoskinen/weather-app.svg?branch=master)](https://travis-ci.org/hkoskinen/weather-app)
+
 Weather application where you can search current temperature by city. You can also save your favorite cities, so you don't have to search them every time.
 
 ## Getting Started
