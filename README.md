@@ -26,7 +26,11 @@ Now you need to add your own OpenWeatherMap API key after the equal siqn REACT_A
 
 ## Running the tests
 
-Once you have the project cloned, and you have run npm install, then you can execute npm test command to run the automated tests.
+Once you have the project cloned, and you have run npm install, then you can execute tests.
+
+```
+npm test
+```
 
 ## License
 
