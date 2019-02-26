@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import './App.css';
 
 import WeatherSearch from './WeatherSearch/WeatherSearch';
@@ -10,26 +11,20 @@ class App extends Component {
     error: null
   }
 
-  makeRequest = city => {
+  makeReq = city => {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${process.env.REACT_APP_WEATHER_API_KEY}`;
 
-    fetch(url)
+    axios.get(url)
       .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-        this.setState({ error: 'Invalid city name' })
+        this.setState({ data: response.data });
       })
-      .then(data => {
-        this.setState({ data });
-      })
-      .catch(err => console.error(err));
+      .catch(err => this.setState({ error: 'Invalid city name' }));
   }
 
   handleSubmit = city => {
     console.log(`${city} submitted`);
     this.setState({ error: '' });
-    this.makeRequest(city);
+    this.makeReq(city);
   }
 
   render() {
