@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
 
-import WeatherSearch from './WeatherSearch/WeatherSearch';
-import WeatherOutput from './WeatherOutput/WeatherOutput';
+import WeatherSearch from '../WeatherSearch/WeatherSearch';
+import WeatherOutput from '../WeatherOutput/WeatherOutput';
 
 class App extends Component {
   state = {
