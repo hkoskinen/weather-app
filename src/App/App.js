@@ -36,9 +36,9 @@ class App extends Component {
   }
 
   saveCity = data => {
-    if (data === null) return;
-    if (this.state.savedCities.includes(data.name)) {
-      return null;
+    if (!storage.isAvailable() || data === null) return;
+    if (this.state.savedCities.indexOf(data.name) !== -1) {
+      return;
     } else {
       return city => {
         storage.setData('city_temps', city);

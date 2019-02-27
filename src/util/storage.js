@@ -2,6 +2,10 @@ import storageAvailable from 'storage-available';
 
 class Storage {
 
+  isAvailable() {
+    return storageAvailable('localStorage');
+  }
+
   getData(key) {
     if (storageAvailable('localStorage')) {
       // localStorage available
