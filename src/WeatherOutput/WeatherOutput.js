@@ -3,12 +3,16 @@ import './WeatherOutput.css';
 
 import TempOutput from '../TempOutput/TempOutput';
 
-const WeatherOutput = ({ data }) => {
+const WeatherOutput = props => {
+  const { data, saveCity } = props;
   return (
     <div className="WeatherOutput">
       {data ? (
         <Fragment>
           <p>Temperature currently in {data.name}, {data.sys.country}</p>
+          {saveCity && <button onClick={() => saveCity(data.name)}>
+            save
+          </button>}
           <TempOutput temperature={data.main.temp} />
         </Fragment>
 

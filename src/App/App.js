@@ -4,11 +4,22 @@ import './App.css';
 
 import WeatherSearch from '../WeatherSearch/WeatherSearch';
 import WeatherOutput from '../WeatherOutput/WeatherOutput';
+import SavedCities from '../SavedCities/SavedCities';
+
+import storage from '../util/storage';
 
 class App extends Component {
   state = {
     data: null,
-    error: null
+    error: null,
+    savedCities: []
+  }
+
+  componentDidMount() {
+    const savedCities = storage.getData('city_temps');
+    if (savedCities !== null) {
+      this.setState({ savedCities });
+    }
   }
 
   makeApiRequest = city => {
@@ -24,8 +35,22 @@ class App extends Component {
     this.makeApiRequest(city);
   }
 
+  saveCity = data => {
+    if (data === null) return;
+    if (this.state.savedCities.includes(data.name)) {
+      return null;
+    } else {
+      return city => {
+        storage.setData('city_temps', city);
+        const savedCities = this.state.savedCities;
+        this.setState({ savedCities: [...savedCities, city]})
+      }
+    }
+  }
+
+
   render() {
-    const { data, error } = this.state;
+    const { data, error, savedCities } = this.state;
     return (
       <div className="App">
         <div className="container">
@@ -34,7 +59,8 @@ class App extends Component {
           </h1>
 
           <WeatherSearch handleSubmit={this.handleSubmit} error={error} />
-          <WeatherOutput data={data} />
+          <WeatherOutput data={data} saveCity={this.saveCity(data)} />
+          <SavedCities cities={savedCities} makeRequest={this.makeApiRequest} />
         </div>
       </div>
     );
