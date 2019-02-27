@@ -1,8 +1,10 @@
 # Weather App ⛅
 
-[![Build Status](https://travis-ci.org/hkoskinen/weather-app.svg?branch=master)](https://travis-ci.org/hkoskinen/weather-app)
+[![Build Status](https://travis-ci.org/hkoskinen/weather-app.svg?branch=master)](https://travis-ci.org/hkoskinen/weather-app) [![Coverage Status](https://coveralls.io/repos/github/hkoskinen/weather-app/badge.svg?branch=master)](https://coveralls.io/github/hkoskinen/weather-app?branch=master)
 
 Weather application where you can search current temperature by city. You can also save your favorite cities, so you don't have to search them every time.
+
+You can see a running demo of the app at [Heroku](https://react-weather-temp-app.herokuapp.com/).
 
 ## Getting Started
 
