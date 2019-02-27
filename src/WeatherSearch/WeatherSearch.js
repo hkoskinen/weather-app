@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './WeatherSearch.css';
+import { Form, Input, Label, Button } from 'semantic-ui-react';
 
 class WeatherSearch extends Component {
   state = {
@@ -18,21 +18,27 @@ class WeatherSearch extends Component {
 
   render() {
     const { input } = this.state;
-    const { error } = this.props;
     return (
-      <div className="WeatherSearch">
-        <form onSubmit={this.handleGetWeather}>
-
-          <input
-            type="text"
-            placeholder={error ? error : "City name"}
-            required
+      <Form onSubmit={this.handleGetWeather}>
+        <Form.Field>
+          <Input
+            fluid
+            error={this.props.error}
             value={input}
-            onChange={this.handleChange} />
-
-          <button type="submit">Get weather</button>
-        </form>
-      </div>
+            onChange={this.handleChange}
+            placeholder='City name'
+          />
+          {
+            this.props.error &&
+            <Label basic color='red' pointing>
+              Please enter valid city name
+            </Label>
+          }
+        </Form.Field>
+        <Button fluid primary size='big'>
+          Get temperature
+        </Button>
+      </Form>
     );
 
   }

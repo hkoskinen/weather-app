@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import './App.css';
+import { Header, Grid, Segment } from 'semantic-ui-react';
 
 import WeatherSearch from '../WeatherSearch/WeatherSearch';
 import WeatherOutput from '../WeatherOutput/WeatherOutput';
@@ -8,10 +8,20 @@ import SavedCities from '../SavedCities/SavedCities';
 
 import storage from '../util/storage';
 
+const style = {
+  mainTitle: {
+    paddingTop: '5rem',
+    fontSize: '5rem',
+    color: '#fff',
+    fontFamily: 'Lobster',
+    fontWeight: 400
+  }
+}
+
 class App extends Component {
   state = {
     data: null,
-    error: null,
+    error: false,
     savedCities: []
   }
 
@@ -26,9 +36,9 @@ class App extends Component {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${process.env.REACT_APP_WEATHER_API_KEY}`;
     axios.get(url)
       .then(response => {
-        this.setState({ data: response.data, error: '' });
+        this.setState({ data: response.data, error: false });
       })
-      .catch(err => this.setState({ error: 'Invalid city name' }));
+      .catch(err => this.setState({ error: true }));
   }
 
   handleSubmit = city => {
@@ -48,20 +58,29 @@ class App extends Component {
     }
   }
 
-
   render() {
     const { data, error, savedCities } = this.state;
     return (
-      <div className="App">
-        <div className="container">
-          <h1 className="App-title">
-            Weather <span role="img" aria-label="Sun behind clouds emoji">⛅</span>
-          </h1>
-
-          <WeatherSearch handleSubmit={this.handleSubmit} error={error} />
-          <WeatherOutput data={data} saveCity={this.saveCity(data)} />
-          <SavedCities cities={savedCities} makeRequest={this.makeApiRequest} />
-        </div>
+      <div>
+        <Header as='h1' textAlign='center' style={style.mainTitle}>
+          Weather <span role="img" aria-label="Sun behind clouds emoji">⛅</span>
+        </Header>
+        <Grid container centered stackable>
+          <Grid.Row>
+            <Grid.Column width={12}>
+              <Segment>
+                <p>Please enter city name to see the current temperature</p>
+                <WeatherSearch handleSubmit={this.handleSubmit} error={error} />
+                {data && <WeatherOutput data={data} saveCity={this.saveCity(data)} />}
+              </Segment>
+            </Grid.Column>
+            <Grid.Column width={4}>
+              <Segment>
+                <SavedCities cities={savedCities} makeRequest={this.makeApiRequest} />
+              </Segment>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </div>
     );
   }

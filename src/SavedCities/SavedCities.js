@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
-
-const SavedCity = props => (
-  <div>
-    <p>{props.name}</p>
-    <button onClick={props.getWeather}>Get weather for {props.name}</button>
-  </div>
-);
+import { Header } from 'semantic-ui-react';
+import SavedCity from './SavedCity';
 
 class SavedCities extends Component {
   render() {
     const { cities } = this.props;
     return (
       <div className="savedCities">
+        <Header as='h2' content='Saved Cities' textAlign='center' />
+        {!cities.length && <p>Save your favorite cities here</p>}
         { cities.map((city, index) => (
-          <SavedCity key={city + index} name={city} getWeather={ () => this.props.makeRequest(city) } />
+          <SavedCity
+            key={city + index}
+            name={city}
+            getWeather={ () => this.props.makeRequest(city) }
+          />
         ))}
       </div>
     );
