@@ -58,6 +58,12 @@ class App extends Component {
     }
   }
 
+  removeCity = cityToRemove => {
+    if (!storage.isAvailable()) return;
+    storage.deleteData('city_temps', cityToRemove);
+    this.setState({ savedCities: this.state.savedCities.filter(city => city !== cityToRemove) });
+  }
+
   render() {
     const { data, error, savedCities } = this.state;
     return (
@@ -67,16 +73,16 @@ class App extends Component {
         </Header>
         <Grid container centered stackable>
           <Grid.Row>
-            <Grid.Column width={12}>
+            <Grid.Column width={11}>
               <Segment>
                 <p>Please enter city name to see the current temperature</p>
                 <WeatherSearch handleSubmit={this.handleSubmit} error={error} />
                 {data && <WeatherOutput data={data} saveCity={this.saveCity(data)} />}
               </Segment>
             </Grid.Column>
-            <Grid.Column width={4}>
+            <Grid.Column width={5}>
               <Segment>
-                <SavedCities cities={savedCities} makeRequest={this.makeApiRequest} />
+                <SavedCities cities={savedCities} makeRequest={this.makeApiRequest} removeCity={this.removeCity} />
               </Segment>
             </Grid.Column>
           </Grid.Row>

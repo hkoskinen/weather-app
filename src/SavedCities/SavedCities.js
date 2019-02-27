@@ -4,7 +4,7 @@ import SavedCity from './SavedCity';
 
 class SavedCities extends Component {
   render() {
-    const { cities } = this.props;
+    const { cities, removeCity } = this.props;
     return (
       <div className="savedCities">
         <Header as='h2' content='Saved Cities' textAlign='center' />
@@ -14,6 +14,7 @@ class SavedCities extends Component {
             key={city + index}
             name={city}
             getWeather={ () => this.props.makeRequest(city) }
+            removeCity={removeCity}
           />
         ))}
       </div>

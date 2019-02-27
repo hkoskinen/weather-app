@@ -29,6 +29,18 @@ class Storage {
       }
     }
   }
+
+  deleteData(key, dataToRemove) {
+    if (storageAvailable('localStorage')) {
+      // localStorage available
+      let data = this.getData(key);
+      if (data !== null) {
+        const index = data.indexOf(dataToRemove);
+        data.splice(index, 1);
+        localStorage.setItem(key, JSON.stringify(data));
+      }
+    }
+  }
 }
 
 export default new Storage();

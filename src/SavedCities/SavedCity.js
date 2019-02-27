@@ -8,15 +8,24 @@ const style = {
 };
 
 const SavedCity = props => (
-  <Button
-    basic
-    color='teal'
-    fluid
-    onClick={props.getWeather}
-    style={style.button}
-  >
-    {props.name}
-  </Button>
+  <div>
+    <Button.Group fluid>
+      <Button
+        content={props.name}
+        color='blue'
+        onClick={props.getWeather}
+        style={style.button}
+      />
+      <Button
+        basic
+        icon='trash alternate'
+        color='black'
+        style={style.button}
+        onClick={() => props.removeCity(props.name)} />
+    </Button.Group>
+
+  </div>
+
 );
 
 export default SavedCity;
