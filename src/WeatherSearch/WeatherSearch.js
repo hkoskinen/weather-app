@@ -45,7 +45,7 @@ class WeatherSearch extends Component {
   }
 }
 WeatherSearch.propTypes = {
-  error: PropTypes.bool.isRequired
+  error: PropTypes.bool
 };
 
 export default WeatherSearch;
