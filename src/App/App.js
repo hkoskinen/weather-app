@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { Header, Grid, Segment } from 'semantic-ui-react';
 
 import WeatherSearch from '../WeatherSearch/WeatherSearch';
@@ -7,6 +6,7 @@ import WeatherOutput from '../WeatherOutput/WeatherOutput';
 import SavedCities from '../SavedCities/SavedCities';
 
 import storage from '../util/storage';
+import  { makeApiRequest } from '../api/request';
 
 const style = {
   mainTitle: {
@@ -34,17 +34,12 @@ class App extends Component {
     }
   }
 
-  makeApiRequest = city => {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${process.env.REACT_APP_WEATHER_API_KEY}`;
-    axios.get(url)
+  handleSubmit = city => {
+    makeApiRequest(city)
       .then(response => {
         this.setState({ data: response.data, error: false });
       })
-      .catch(err => this.setState({ error: true }));
-  }
-
-  handleSubmit = city => {
-    this.makeApiRequest(city);
+      .catch(() => this.setState({ error: true }));
   }
 
   saveCity = data => {
@@ -84,7 +79,7 @@ class App extends Component {
             </Grid.Column>
             <Grid.Column width={5}>
               <Segment>
-                <SavedCities cities={savedCities} makeRequest={this.makeApiRequest} removeCity={this.removeCity} />
+                <SavedCities cities={savedCities} makeRequest={this.handleSubmit} removeCity={this.removeCity} />
               </Segment>
             </Grid.Column>
           </Grid.Row>
