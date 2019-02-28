@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Form, Input, Label, Button } from 'semantic-ui-react';
 
 class WeatherSearch extends Component {
@@ -43,5 +44,8 @@ class WeatherSearch extends Component {
 
   }
 }
+WeatherSearch.propTypes = {
+  error: PropTypes.bool.isRequired
+};
 
 export default WeatherSearch;

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Header } from 'semantic-ui-react';
 import SavedCity from './SavedCity';
 
@@ -21,5 +22,9 @@ class SavedCities extends Component {
     );
   }
 }
+SavedCities.propTypes = {
+  cities: PropTypes.array.isRequired,
+  removeCity: PropTypes.func.isRequired
+};
 
 export default SavedCities;

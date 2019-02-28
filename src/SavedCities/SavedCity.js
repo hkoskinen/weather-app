@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button } from 'semantic-ui-react';
 
 const style = {
@@ -23,9 +24,12 @@ const SavedCity = props => (
         style={style.button}
         onClick={() => props.removeCity(props.name)} />
     </Button.Group>
-
   </div>
-
 );
+SavedCity.propTypes = {
+  name: PropTypes.string.isRequired,
+  getWeather: PropTypes.func.isRequired,
+  removeCity: PropTypes.func.isRequired
+};
 
 export default SavedCity;

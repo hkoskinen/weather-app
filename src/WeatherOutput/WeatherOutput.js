@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Segment, Button, Card, Icon } from 'semantic-ui-react';
 
 const style = {
@@ -44,6 +45,10 @@ const WeatherOutput = props => {
       </Card>
     </Segment>
   );
+};
+WeatherOutput.propTypes = {
+  data: PropTypes.object.isRequired,
+  saveCity: PropTypes.func
 };
 
 export default WeatherOutput;
