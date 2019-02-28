@@ -18,6 +18,8 @@ const style = {
   }
 }
 
+const storageKey = 'city_temps';
+
 class App extends Component {
   state = {
     data: null,
@@ -26,7 +28,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const savedCities = storage.getData('city_temps');
+    const savedCities = storage.getData(storageKey);
     if (savedCities !== null) {
       this.setState({ savedCities });
     }
@@ -51,7 +53,7 @@ class App extends Component {
       return;
     } else {
       return city => {
-        storage.setData('city_temps', city);
+        storage.setData(storageKey, city);
         const savedCities = this.state.savedCities;
         this.setState({ savedCities: [...savedCities, city]})
       }
@@ -60,7 +62,7 @@ class App extends Component {
 
   removeCity = cityToRemove => {
     if (!storage.isAvailable()) return;
-    storage.deleteData('city_temps', cityToRemove);
+    storage.deleteData(storageKey, cityToRemove);
     this.setState({ savedCities: this.state.savedCities.filter(city => city !== cityToRemove) });
   }
 
