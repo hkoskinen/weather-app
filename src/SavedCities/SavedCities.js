@@ -4,6 +4,9 @@ import { Header } from 'semantic-ui-react';
 import SavedCity from './SavedCity';
 
 class SavedCities extends Component {
+  getWeather = () => {
+
+  }
   render() {
     const { cities, removeCity } = this.props;
     return (
@@ -14,7 +17,7 @@ class SavedCities extends Component {
           <SavedCity
             key={city + index}
             name={city}
-            getWeather={ () => this.props.makeRequest(city) }
+            getWeather={this.props.makeRequest}
             removeCity={removeCity}
           />
         ))}

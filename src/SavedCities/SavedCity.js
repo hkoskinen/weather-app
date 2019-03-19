@@ -8,13 +8,13 @@ const style = {
   }
 };
 
-const SavedCity = props => (
+const SavedCity = ({name, getWeather, removeCity}) => (
   <div>
     <Button.Group fluid>
       <Button
-        content={props.name}
+        content={name}
         color='blue'
-        onClick={props.getWeather}
+        onClick={() => getWeather(name)}
         style={style.button}
       />
       <Button
@@ -22,7 +22,7 @@ const SavedCity = props => (
         icon='trash alternate'
         color='black'
         style={style.button}
-        onClick={() => props.removeCity(props.name)} />
+        onClick={() => removeCity(name)} />
     </Button.Group>
   </div>
 );

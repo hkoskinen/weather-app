@@ -72,7 +72,6 @@ class App extends Component {
           <Grid.Row>
             <Grid.Column width={11}>
               <Segment>
-                <p>Please enter city name to see the current temperature</p>
                 <WeatherSearch handleSubmit={this.handleSubmit} error={error} />
                 {data && <WeatherOutput data={data} saveCity={this.saveCity(data)} />}
               </Segment>

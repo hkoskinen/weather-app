@@ -22,21 +22,24 @@ class WeatherSearch extends Component {
     return (
       <Form onSubmit={this.handleGetWeather}>
         <Form.Field>
-          <Input
-            fluid
-            error={this.props.error}
-            value={input}
-            onChange={this.handleChange}
-            placeholder='City name'
-          />
-          {
-            this.props.error &&
-            <Label basic color='red' pointing>
-              Please enter valid city name
-            </Label>
-          }
+          <label>
+            <p>Please enter city name to see the current temperature</p>
+            <Input
+              fluid
+              error={this.props.error}
+              value={input}
+              onChange={this.handleChange}
+              placeholder='City name'
+            />
+            {
+              this.props.error &&
+              <Label basic color='red' pointing>
+                Please enter valid city name
+              </Label>
+            }
+          </label>
         </Form.Field>
-        <Button fluid primary size='big'>
+        <Button fluid primary size='big' type='submit'>
           Get temperature
         </Button>
       </Form>
